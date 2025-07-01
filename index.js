@@ -1,8 +1,7 @@
 
 
 
-let translateSum = 0
-
+let translateSum = 2000
 
 async function getProducts() {
     try {
@@ -19,8 +18,7 @@ const imgContainer = document.querySelector('.carousel__img-container')
 
 async function productElements() {
     const imgArr = await getProducts()
-
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 3; i++) {
         imgArr.forEach((item, index) => {
             const imgs = document.createElement('div')
             imgs.innerHTML = 
@@ -31,23 +29,24 @@ async function productElements() {
             </div>`
             imgs.classList.add('imgs')
             imgContainer.append(imgs)
-            imgs.className = `imgs`
         })
     }
+    imgContainer.style.transform = `translateX(-${100 * imgArr.length}px)`
 }
 productElements()
 
-
-async function leftBtnClick() {
-    const leftBtn = document.querySelector('.left-btn')
+async function rightBtnClick() {
+    const leftBtn = document.querySelector('.right-btn')
 
     const imgArr = await getProducts();
     leftBtn.addEventListener('click', () => {
         translateSum += 100
+                console.log(translateSum)
+
         imgContainer.style.transition = 'transform 0.2s ease-in'
-        if (translateSum === 100 * (imgArr.length + 1)) {
-            imgContainer.style.transform = `translateX(-${100 * (imgArr.length + 1)}px)`
-            translateSum = 100
+        if (translateSum === 100 * (imgArr.length) * 2) {
+            imgContainer.style.transform = `translateX(-${100 * (imgArr.length) * 2}px)`
+            translateSum = 2000
             setTimeout(() => {
                 imgContainer.style.transform = `translateX(-${translateSum}px)`
                 imgContainer.style.transition = 'none'
@@ -59,29 +58,29 @@ async function leftBtnClick() {
         }
     })
 }
-leftBtnClick()
+rightBtnClick()
 
 
-
-async function rightBtnClick() {
-    const leftBtn = document.querySelector('.right-btn')
+async function leftBtnClick() {
+    const leftBtn = document.querySelector('.left-btn')
     const imgArr = await getProducts();
     leftBtn.addEventListener('click', () => {
-        translateSum += 100
         imgContainer.style.transition = 'transform 0.2s ease-in'
-        if (translateSum === 100 * (imgArr.length + 1)) {
-            imgContainer.style.transform = `translateX(${100 * (imgArr.length + 1)}px)`
-            translateSum = 100
+        if (translateSum === 100 * imgArr.length) {
+            imgContainer.style.transform = `translateX(-${100 * (imgArr.length - 1)}px)`
+            translateSum = 100 * (imgArr.length - 1)
             setTimeout(() => {
-                imgContainer.style.transform = `translateX(${translateSum}px)`
+                imgContainer.style.transform = `translateX(-${100 * (imgArr.length) * 2 - 100}px)`
                 imgContainer.style.transition = 'none'
-
+                translateSum = 100 * (imgArr.length) * 2 - 100
             }, 200)
         }
         else {
-        imgContainer.style.transform = `translateX(${translateSum}px)`
+            translateSum -= 100
+            imgContainer.style.transform = `translateX(-${translateSum}px)`
         }
+        console.log(translateSum)
     })
 }
-rightBtnClick()
+leftBtnClick()
 

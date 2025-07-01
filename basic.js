@@ -17,10 +17,10 @@ for (let i = 0; i < 3; i++) {
     })
 }
 
-const leftBtn = document.querySelector('.left-btn')
+const leftBtn = document.querySelector('.right-btn')
 
 
-leftBtn.addEventListener('click', () => {
+rightBtn.addEventListener('click', () => {
     translateSum += 100
     imgContainer.style.transition = 'transform 0.2s ease-in'
     if (translateSum === 100 * (imgArr.length + 1)) {
