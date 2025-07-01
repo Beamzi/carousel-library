@@ -1,0 +1,37 @@
+p {
+    background-color: blue;
+}
+
+.carousel {
+    display: flex;
+    justify-content: center;
+}
+
+.carousel__img-container {
+    display: flex;
+}
+
+.carousel__overflow-container {
+    width: 400px;
+    overflow: hidden;
+}
+
+.imgs {
+    min-width: 100px;
+    height: 400px;
+}
+
+.slide-anim {
+    animation: ease-out 0.5s slide-left;
+}
+
+@keyframes slide-left {
+    100% {
+        transform: translate(-50px);
+    }
+}
+
+.pulledImages {
+    width: 50px;
+    height: 50px;
+}
